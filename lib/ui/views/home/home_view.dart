@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:template/ui/common/app_colors.dart';
-import 'package:template/ui/common/ui_helpers.dart';
-
+import 'package:template/ui/widgets/dumb/theme_popup_menu.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../common/app_constants.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -16,65 +16,51 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                verticalSpaceLarge,
-                Column(
-                  children: [
-                    const Text(
-                      'Hello, STACKED!',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    verticalSpaceMedium,
-                    MaterialButton(
-                      color: Colors.black,
-                      onPressed: viewModel.incrementCounter,
-                      child: Text(
-                        viewModel.counterLabel,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showDialog,
-                      child: const Text(
-                        'Show Dialog',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      onPressed: viewModel.showBottomSheet,
-                      child: const Text(
-                        'Show Bottom Sheet',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context).homeScreenTitle,
+              style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                    color: textColor(context),
+                  ),
             ),
+            actions: [ThemePopUpMenuWidget(options: getMenuOptions(viewModel: viewModel, context: context))],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(),
           ),
         ),
       ),
     );
+  }
+
+  List<PopUpMenuOptions> getMenuOptions({required HomeViewModel viewModel, required BuildContext context  ,}) {
+    List<PopUpMenuOptions> menuOptions = [];
+
+    menuOptions.add(
+      PopUpMenuOptions(
+        menuValue: 0,
+        // menuIcon: const Icon(Icons.settings),
+        onMenuItemSelected: () {
+          viewModel.takeToChangeThemeView();
+        },
+        menuTitle: AppLocalizations.of(context).changeThemeText,
+      ),
+    );
+
+    menuOptions.add(
+      PopUpMenuOptions(
+        menuValue: 1,
+        // menuIcon: const Icon(Icons.abc),
+        onMenuItemSelected: () {
+          viewModel.takeToLanguageChangeView();
+        },
+        menuTitle: AppLocalizations.of(context).changeLanguageText,
+      ),
+    );
+
+    return menuOptions;
   }
 
   @override

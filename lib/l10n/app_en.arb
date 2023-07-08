@@ -1,0 +1,48 @@
+{
+    "languageScreenTitle":"Choose language",
+    "@languageScreenTitle": {
+      "description": "language Screen Title Text"
+    },
+
+    "languageHindi":"Hindi",
+    "@languageHindi":{
+      "description":"Language Hindi Text"
+    },
+
+    "languageEnglish":"English",
+    "@languageEnglish":{
+      "description":"Language English Text"
+    },
+
+    "inActiveInternetConnectionText":"No internet connection",
+    "@inActiveInternetConnectionText": {
+       "description": "Text which is shown when device gets offline."
+    },
+
+    "activeInternetConnectionText":"The internet connection is active now",
+    "@activeInternetConnectionText": {
+       "description": "Text which is shown when device gets online."
+    },
+
+    "dataSyncText":"The data update is in progress",
+    "@dataSyncText": {
+       "description": "Text which is shown when device gets online, and there are offline Apis to hit."
+    },
+
+    "homeScreenTitle":"Home",
+    "@homeScreenTitle": {
+      "description": "Home Screen AppBar Title Text"
+    },
+
+    "changeThemeText":"Theme Change",
+    "@changeThemeText": {
+      "description": "Change Theme Text"
+    },
+
+    "changeLanguageText":"Language Change",
+    "@changeLanguageText": {
+      "description": "Change Language Text"
+    }
+
+
+}

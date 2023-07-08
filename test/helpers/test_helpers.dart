@@ -2,6 +2,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:template/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:template/services/app_theme_service.dart';
+import 'package:template/services/app_preference_service.dart';
+import 'package:template/services/app_connectivity_listener_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +13,20 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<AppThemeService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<AppPreferenceService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<AppConnectivityListenerService>(
+      onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterAppThemeService();
+  getAndRegisterAppPreferenceService();
+  getAndRegisterAppConnectivityListenerService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +79,27 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockAppThemeService getAndRegisterAppThemeService() {
+  _removeRegistrationIfExists<AppThemeService>();
+  final service = MockAppThemeService();
+  locator.registerSingleton<AppThemeService>(service);
+  return service;
+}
+
+MockAppPreferenceService getAndRegisterAppPreferenceService() {
+  _removeRegistrationIfExists<AppPreferenceService>();
+  final service = MockAppPreferenceService();
+  locator.registerSingleton<AppPreferenceService>(service);
+  return service;
+}
+
+MockAppConnectivityListenerService
+    getAndRegisterAppConnectivityListenerService() {
+  _removeRegistrationIfExists<AppConnectivityListenerService>();
+  final service = MockAppConnectivityListenerService();
+  locator.registerSingleton<AppConnectivityListenerService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

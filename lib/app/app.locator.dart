@@ -9,7 +9,12 @@
 import 'package:stacked_services/src/bottom_sheet/bottom_sheet_service.dart';
 import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
+import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
+
+import '../services/app_connectivity_listener_service.dart';
+import '../services/app_preference_service.dart';
+import '../services/app_theme_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -22,7 +27,14 @@ Future<void> setupLocator({
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
+  final appPreferenceService = AppPreferenceService();
+  await appPreferenceService.init();
+  locator.registerSingleton(appPreferenceService);
+
+  locator.registerLazySingleton(() => AppThemeService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton(() => AppConnectivityListenerService());
 }

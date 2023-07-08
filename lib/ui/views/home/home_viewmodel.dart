@@ -1,11 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:template/app/app.bottomsheets.dart';
 import 'package:template/app/app.dialogs.dart';
 import 'package:template/app/app.locator.dart';
+import 'package:template/app/app.router.dart';
+import 'package:template/app/app_baseview_model.dart';
 import 'package:template/ui/common/app_strings.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:template/ui/widgets/dumb/theme_popup_menu.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends BaseViewModel with AppBaseViewModel {
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
@@ -33,4 +37,12 @@ class HomeViewModel extends BaseViewModel {
       description: ksHomeBottomSheetDescription,
     );
   }
+
+  
+  void takeToChangeThemeView() {
+    navigationService.navigateToThemeChangeView();
+  }
+
+  void takeToLanguageChangeView() =>
+      navigationService.navigateToLanguageChangeView();
 }

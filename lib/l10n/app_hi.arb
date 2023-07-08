@@ -1,0 +1,11 @@
+{
+    "languageScreenTitle":"भाषा चुनें",
+    "languageHindi":"हिंदी",
+    "languageEnglish":"अंग्रेज़ी",
+    "inActiveInternetConnectionText":"No internet connection",
+    "activeInternetConnectionText":"इंटरनेट कनेक्शन अब सक्रिय है",
+    "dataSyncText":"डेटा अपडेट का काम चल रहा है",
+    "homeScreenTitle":"घर",
+    "changeThemeText":"थीम परिवर्तन",
+    "changeLanguageText":"भाषा परिवर्तन"
+}

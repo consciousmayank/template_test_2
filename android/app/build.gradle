@@ -21,6 +21,19 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def dartEnvironmentVariables = [
+    APP_NAME: project.hasProperty('APP_NAME')
+            ? APP_NAME
+            : 'templateApp',
+    APP_SUFFIX: project.hasProperty('APP_SUFFIX')
+            ? APP_SUFFIX
+            : null,
+    APP_BUNDLE_IDENTIFIER: project.hasProperty('APP_BUNDLE_IDENTIFIER')
+            ? APP_BUNDLE_IDENTIFIER
+            : 'com.template.app'
+
+];
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -45,13 +58,15 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.template"
+        applicationId APP_BUNDLE_IDENTIFIER
+        applicationIdSuffix dartEnvironmentVariables.APP_SUFFIX
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue "string", "app_name", dartEnvironmentVariables.APP_NAME
     }
 
     buildTypes {
